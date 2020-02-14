@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Notification Center</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.1/examples/checkout/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body class="bg-light">
+<div class="container">
+    <div class="py-5 text-center">
+        <img class="d-block mx-auto mb-4" src="/assets/img/logo.png" alt="" width="150" height="50">
+        <h2>Notification Center</h2>
+        <p class="lead">Welcome {{ user }}.</p>
+        <div>
+            <ul class="list-inline">
+                <li class="list-inline-item"><a class="text-xs-center" href="#">All ({{ all | length }})</a></li>
+                <li class="list-inline-item"><a class="text-xs-center" href="#">Read ({{ read | length }})</a></li>
+                <li class="list-inline-item"><a class="text-xs-center" href="#">Unread ({{ unread | length }})</a></li>
+            </ul>
+        </div>
+        <hr/>
+    </div>
+
+    <div class="row">
+        <div class="container">
+            <div class="card card-default" id="card_notifications">
+                <div id="notification" class="panel-collapse collapse show" aria-expanded="true" style="">
+                    <ul class="list-group pull-down" id="notification-list">
+                        {% for notification in notifications %}
+                        <li class="list-group-item">
+                            <div class="row w-100">
+                                <div class="col-12 col-sm-6 col-md-3 px-0">
+                                    <img src="/assets/img/deezer.jpg" alt="{{ notification.type }}" class="rounded-circle mx-auto d-block img-fluid">
+                                </div>
+                                <div class="col-12 col-sm-6 col-md-9 mt-2 text-center text-sm-left">
+                                    <span class="text-muted" data-toggle="tooltip" title=""></span>
+                                    <span class="text-muted">{{ notification.description }}</span>
+                                    <br>
+                                    <span class="text-muted" data-toggle="tooltip" title=""></span>
+                                    <span class="text-muted small">{{ notification.type }}</span>
+                                    <br>
+                                    <span class="text-muted" data-toggle="tooltip" title=""></span>
+                                    <span class="text-muted small text-truncate">
+                                        {% set difference = date("now"|date("Y-m-d H:i:s")).diff(date(notification.date)) %}
+                                        {% set leftDays = difference.days %}
+                                        {% if leftDays == 1 %}
+                                            1 day
+                                        {% else %}
+                                            {{ leftDays }} days
+                                        {% endif %}
+                                    </span>
+                                    <br><br>
+                                    <span class="text-muted" data-toggle="tooltip" title=""></span>
+                                    <span class="text-muted small"><a href="/notifications/read/{{ notification.id_notification }}" class="btn btn-primary">marquer comme lu</a></span>
+                                    <br>
+                                </div>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">Deezer copyright © 2020</p>
+    </footer>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function() {
+        'use strict';
+
+        window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
+</body>
+</html>
