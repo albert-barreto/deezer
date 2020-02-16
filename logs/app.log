@@ -1,1 +1,5 @@
 [2020-02-16 02:20:00] deezer.INFO: test logger [] {"uid":"eed05ff"}
+[2020-02-16 16:30:17] deezer-notification-center.INFO: test logger [] {"uid":"976b141"}
+[2020-02-16 16:55:51] deezer-notification-center.INFO: test logger [] {"uid":"bf6a708"}
+[2020-02-16 16:56:40] deezer-notification-center.INFO: test logger [] {"uid":"0b33515"}
+[2020-02-16 17:03:11] deezer-notification-center.INFO: test logger [] {"uid":"749cbac"}

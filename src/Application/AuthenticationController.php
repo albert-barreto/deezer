@@ -8,7 +8,7 @@ use Slim\Http\Request;
 use Slim\Http\Response;
 use Psr\Http\Message\ResponseInterface;
 
-use Deezer\Infrastructure\Authentication;
+use Deezer\Infrastructure\Middleware\Authentication;
 
 class AuthenticationController
 {

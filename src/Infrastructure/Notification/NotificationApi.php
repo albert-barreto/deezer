@@ -1,6 +1,6 @@
 <?php
 
-namespace Deezer\Infrastructure;
+namespace Deezer\Infrastructure\Notification;
 
 use Deezer\Domain\Notification\NotificationRepository;
 

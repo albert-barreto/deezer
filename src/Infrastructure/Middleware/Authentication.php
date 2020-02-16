@@ -1,6 +1,6 @@
 <?php
 
-namespace Deezer\Infrastructure;
+namespace Deezer\Infrastructure\Middleware;
 
 use Deezer\Domain\User\UserRepository;
 

@@ -25,7 +25,7 @@ return [
         ],
 
         'database' => [
-            'conn' => 'mysql:host=localhost;port=3306;dbname=deezer',
+            'conn' => 'mysql:host=127.0.0.1;port=3306;dbname=deezer',
             'user' => 'root',
             'pass' => 'root'
         ],

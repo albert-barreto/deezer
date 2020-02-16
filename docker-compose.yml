@@ -1,0 +1,19 @@
+version: '3.7'
+
+services:
+  deezer:
+    image: php:7-alpine
+    container_name: deezer
+    working_dir: /var/www
+    command: php -S 0.0.0.0:8787 -t public
+    environment:
+      docker: "true"
+    ports:
+      - 8787:8787
+    volumes:
+      - .:/var/www
+      - logs:/var/www/logs
+
+volumes:
+  logs:
+    driver: local

@@ -1,6 +1,6 @@
 <?php
 
-namespace Deezer\Infrastructure;
+namespace Deezer\Infrastructure\User;
 
 use PDO;
 use Deezer\Domain\User\User;
