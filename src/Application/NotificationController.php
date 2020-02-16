@@ -97,7 +97,7 @@ class NotificationController
         try {
             $this->notificationRepository->insert($notification);
         } catch (Exception $e) {
-            //$this->logger->error('Error - Unable to create a new notification: '. $e->getMessage());
+            $this->logger->error('Error - Unable to create a new notification: '. $e->getMessage());
         }
         return $response->withRedirect('/notifications/'.$_SESSION['user'], 200);
     }
