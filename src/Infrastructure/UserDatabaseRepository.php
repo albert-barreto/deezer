@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Deezer\Infrastructure;
-
 
 use PDO;
 use Deezer\Domain\User\User;
@@ -17,7 +15,7 @@ class UserDatabaseRepository implements UserRepository
     /** @var PDO $pdoConnection */
     private $pdoConnection;
 
-    public function __construct(\PDO $pdoConnection, $logger)
+    public function __construct(PDO $pdoConnection, $logger)
     {
         $this->logger        = $logger;
         $this->pdoConnection = $pdoConnection;
@@ -26,7 +24,7 @@ class UserDatabaseRepository implements UserRepository
     public function findAll()
     {
         $statement = $this->pdoConnection->query('SELECT * FROM ' . $this->table);
-        $resultSet = $statement->fetchAll(\PDO::FETCH_ASSOC);
+        $resultSet = $statement->fetchAll(PDO::FETCH_ASSOC);
 
         $users = [];
         foreach ($resultSet as $resultRow) {
@@ -40,7 +38,7 @@ class UserDatabaseRepository implements UserRepository
     {
         $statement = $this->pdoConnection->prepare('SELECT * FROM ' . $this->table . ' WHERE id_user=?');
         $statement->execute([$id]);
-        $resultSet = $statement->fetchAll(\PDO::FETCH_ASSOC);
+        $resultSet = $statement->fetchAll(PDO::FETCH_ASSOC);
 
         return $this->mapRow($resultSet[0]);
     }
@@ -49,13 +47,7 @@ class UserDatabaseRepository implements UserRepository
     {
         $statement = $this->pdoConnection->prepare('SELECT * FROM ' . $this->table . ' WHERE email=?');
         $statement->execute([$email]);
-        $resultSet = $statement->fetchAll(\PDO::FETCH_ASSOC);
-
-        if ($resultSet !== null) {
-            return $this->mapRow($resultSet[0]);
-        } else {
-            return false;
-        }
+        return $this->mapRow($statement->fetchAll(PDO::FETCH_ASSOC)[0]);
     }
 
     public function insert(User $user): void

@@ -2,6 +2,7 @@
 
 namespace Deezer\Application;
 
+use Exception;
 use Slim\Http\Request;
 use Slim\Http\Response;
 
@@ -37,7 +38,7 @@ class UserController
 
         try {
             $this->userRepository->insert($user);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             //$this->logger->error('Error - Unable to create a new notification: '. $e->getMessage());
         }
         return $response->withRedirect('/users', 200);

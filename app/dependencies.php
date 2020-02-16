@@ -1,6 +1,5 @@
 <?php
 
-use Monolog\Logger;
 use Slim\Views\Twig;
 use Slim\Views\TwigExtension;
 

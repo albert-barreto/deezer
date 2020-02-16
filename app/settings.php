@@ -19,13 +19,13 @@ return [
 
         // Monolog settings
         'logger' => [
-            'name' => 'deezer',
-            'path' => isset($_ENV['docker']) ? 'php://stdout' : dirname( __DIR__ , 2 ) . '/logs/app.log',
+            'name' => 'deezer-notification-center',
+            'path' => isset($_ENV['docker']) ? 'php://stdout' : dirname( __DIR__ , 1 ) . '/logs/app.log',
             'level' => Logger::DEBUG,
         ],
 
         'database' => [
-            'conn' => 'mysql:host=127.0.0.1;port=3306;dbname=deezer',
+            'conn' => 'mysql:host=localhost;port=3306;dbname=deezer',
             'user' => 'root',
             'pass' => 'root'
         ],

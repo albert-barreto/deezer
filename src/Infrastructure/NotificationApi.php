@@ -2,10 +2,6 @@
 
 namespace Deezer\Infrastructure;
 
-use Monolog\Logger;
-use Slim\Http\Request;
-use Slim\Http\Response;
-
 use Deezer\Domain\Notification\NotificationRepository;
 
 class NotificationApi

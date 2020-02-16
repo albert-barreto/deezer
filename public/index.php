@@ -1,5 +1,7 @@
 <?php
 
+use Slim\App;
+
 header("Access-Control-Allow-Origin: *");
 
 if (PHP_SAPI == 'cli-server') {
@@ -15,9 +17,9 @@ require __DIR__ . '/../vendor/autoload.php';
 // Instantiate the app
 $settings = require __DIR__ . '/../app/settings.php';
 
-$app = new \Slim\App;
+$app = new App;
 
-$app = new \Slim\App($settings);
+$app = new App($settings);
 
 // Set up dependencies
 require __DIR__ . '/../app/dependencies.php';

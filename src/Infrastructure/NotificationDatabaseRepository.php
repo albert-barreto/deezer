@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Deezer\Infrastructure;
-
 
 use PDO;
 use Deezer\Domain\Notification\Notification;
@@ -16,7 +14,7 @@ class NotificationDatabaseRepository implements NotificationRepository
     /** @var PDO $pdoConnection */
     private $pdoConnection;
 
-    public function __construct(\PDO $pdoConnection, $logger)
+    public function __construct(PDO $pdoConnection, $logger)
     {
         $this->logger        = $logger;
         $this->pdoConnection = $pdoConnection;
@@ -29,7 +27,7 @@ class NotificationDatabaseRepository implements NotificationRepository
                         FROM deezer.notification INNER JOIN message ON notification.id_message = message.id_message 
                         INNER JOIN user ON user.id_user = notification.id_user ORDER BY notification.date DESC');
 
-        return $statement->fetchAll(\PDO::FETCH_ASSOC);
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function findByUser(int $id): array
@@ -40,7 +38,7 @@ class NotificationDatabaseRepository implements NotificationRepository
                         INNER JOIN user ON user.id_user = notification.id_user WHERE notification.id_user = ? ORDER BY notification.date DESC');
 
         $statement->execute([$id]);
-        return $statement->fetchAll(\PDO::FETCH_ASSOC);
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function notificationsRead(int $id): array
@@ -51,7 +49,7 @@ class NotificationDatabaseRepository implements NotificationRepository
                         INNER JOIN user ON user.id_user = notification.id_user WHERE notification.id_user = ? AND notification.status = 1 ORDER BY notification.date DESC');
 
         $statement->execute([$id]);
-        return $statement->fetchAll(\PDO::FETCH_ASSOC);
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function notificationsUnread(int $id): array
@@ -62,7 +60,7 @@ class NotificationDatabaseRepository implements NotificationRepository
                         INNER JOIN user ON user.id_user = notification.id_user WHERE notification.id_user = ? AND notification.status = 0 ORDER BY notification.date DESC');
 
         $statement->execute([$id]);
-        return $statement->fetchAll(\PDO::FETCH_ASSOC);
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function insert(Notification $notification): void

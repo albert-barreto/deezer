@@ -2,13 +2,11 @@
 
 namespace Deezer\Application;
 
-use Couchbase\LookupInBuilder;
-use DateTime;
+use Exception;
 use Monolog\Logger;
 use Slim\Views\Twig;
 use Slim\Http\Request;
 use Slim\Http\Response;
-use GuzzleHttp\Client as GuzzleClient;
 use Psr\Http\Message\ResponseInterface;
 
 use Deezer\Infrastructure\NotificationApi;
@@ -35,8 +33,9 @@ class NotificationController
      * @param NotificationApi $notificationApi
      * @param NotificationRepository $notificationRepository
      */
-    public function __construct(Twig $twig, $logger, NotificationApi $notificationApi, NotificationRepository $notificationRepository)
+    public function __construct(Twig $twig, Logger $logger, NotificationApi $notificationApi, NotificationRepository $notificationRepository)
     {
+        $this->logger = $logger;
         $this->renderer = $twig;
         $this->notificationApi = $notificationApi;
         $this->notificationRepository = $notificationRepository;
@@ -81,6 +80,7 @@ class NotificationController
 
     public function notificationAll(Request $request, Response $response)
     {
+        $this->logger->info("test logger");
         return $response->withJson($this->notificationRepository->findAll());
     }
 
@@ -96,7 +96,7 @@ class NotificationController
 
         try {
             $this->notificationRepository->insert($notification);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             //$this->logger->error('Error - Unable to create a new notification: '. $e->getMessage());
         }
         return $response->withRedirect('/notifications/'.$_SESSION['user'], 200);
