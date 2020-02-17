@@ -18,14 +18,14 @@ $app->group('/api', function () use ($app) {
 
     $app->group('/notifications', function () use ($app) {
 
-        $this->post('/new', 'notificationController:newNotification');
+        $this->post('/new', 'notificationApiController:newNotification');
 
-        $this->put('/read/{id:[0-9]+}', 'notificationController:notificationRead');
+        $this->put('/read/{id:[0-9]+}', 'notificationApiController:notificationRead');
 
-        $this->get('', 'notificationController:notificationAll');
-        $this->get('/user/{id:[0-9]+}', 'notificationController:notificationUser');
-        $this->get('/read/user/{id:[0-9]+}', 'notificationController:notificationReadUser');
-        $this->get('/unread/user/{id:[0-9]+}', 'notificationController:notificationUnreadUser');
+        $this->get('', 'notificationApiController:notificationAll');
+        $this->get('/user/{id:[0-9]+}', 'notificationApiController:notificationUser');
+        $this->get('/read/user/{id:[0-9]+}', 'notificationApiController:notificationReadUser');
+        $this->get('/unread/user/{id:[0-9]+}', 'notificationApiController:notificationUnreadUser');
 
     });
 
@@ -41,12 +41,12 @@ $app->group('', function () use ($app) {
 
     $app->group('/notifications', function () use ($app) {
         $this->get('/{id:[0-9]+}', 'notificationController:viewNotification');
-        $this->post('/new', 'notificationController:newNotification');
-        $this->put('/update', 'notificationController:updateNotification');
-        $this->get('/add', 'notificationController:createNotification');
+        $this->post('/new', 'notificationUiController:newNotification');
+        $this->put('/update', 'notificationUiController:updateNotification');
+        $this->get('/add', 'notificationUiController:createNotification');
 
-        $this->get('/read/{id:[0-9]+}', 'notificationController:viewNotificationRead');
-        $this->get('/unread/{id:[0-9]+}', 'notificationController:viewNotificationUnread');
+        $this->get('/read/{id:[0-9]+}', 'notificationUiController:viewNotificationRead');
+        $this->get('/unread/{id:[0-9]+}', 'notificationUiController:viewNotificationUnread');
 
         //$this->get('/read/{id:[0-9]+}', 'notificationController:notificationRead');
     });

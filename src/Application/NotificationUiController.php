@@ -1,6 +1,8 @@
 <?php
 
+
 namespace Deezer\Application;
+
 
 use Exception;
 use Monolog\Logger;
@@ -13,8 +15,9 @@ use Deezer\Domain\Notification\Notification;
 use Deezer\Domain\Notification\NotificationRepository;
 use Deezer\Infrastructure\Notification\NotificationApi;
 
-class NotificationController
+class NotificationUiController
 {
+
     /** @var Logger */
     private $logger;
 
@@ -26,9 +29,9 @@ class NotificationController
 
     /** @var NotificationRepository */
     private $notificationRepository;
-
+    
     /**
-     * NotificationController constructor.
+     * NotificationUiController constructor.
      * @param Twig $twig
      * @param Logger $logger
      * @param NotificationApi $notificationApi
@@ -81,32 +84,6 @@ class NotificationController
     public function createNotification(Request $request, Response $response): ResponseInterface
     {
         return $this->renderer->render($response, '/templates/form.html.twig');
-    }
-
-    public function notificationUser(Request $request, Response $response, $id)
-    {
-        return $response->withJson($this->notificationRepository->findByUser($id['id']));
-    }
-
-    public function notificationReadUser(Request $request, Response $response, $id)
-    {
-        return $response->withJson($this->notificationRepository->notificationsRead($id['id']));
-    }
-
-    public function notificationUnreadUser(Request $request, Response $response, $id)
-    {
-        return $response->withJson($this->notificationRepository->notificationsUnread($id['id']));
-    }
-
-    public function notificationRead(Request $request, Response $response, $id)
-    {
-        $this->notificationRepository->update($id['id']);
-        return $response->withRedirect(('/notifications/'.$_SESSION['user']), 200);
-    }
-
-    public function notificationAll(Request $request, Response $response)
-    {
-        return $response->withJson($this->notificationRepository->findAll());
     }
 
     public function newNotification(Request $request, Response $response)

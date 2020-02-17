@@ -4,7 +4,8 @@ use Slim\Views\Twig;
 use Slim\Views\TwigExtension;
 
 use Deezer\Application\UserController;
-use Deezer\Application\NotificationController;
+use Deezer\Application\NotificationUiController;
+use Deezer\Application\NotificationApiController;
 use Deezer\Application\AuthenticationController;
 
 use Deezer\Infrastructure\Middleware\Authentication;
@@ -72,8 +73,12 @@ $container['notificationRepository'] = function ($c) {
     return new NotificationDatabaseRepository($c->pdoConnection, $c->logger);
 };
 
-$container['notificationController'] = function ($c) {
-    return new NotificationController($c->renderer, $c->logger, $c->notificationApi, $c->notificationRepository);
+$container['notificationApiController'] = function ($c) {
+    return new NotificationApiController($c->renderer, $c->logger, $c->notificationApi, $c->notificationRepository);
+};
+
+$container['notificationUiController'] = function ($c) {
+    return new NotificationUiController($c->renderer, $c->logger, $c->notificationApi, $c->notificationRepository);
 };
 
 // ---------------------------
