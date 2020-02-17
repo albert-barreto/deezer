@@ -42,6 +42,12 @@ class NotificationApiController
         $this->notificationRepository = $notificationRepository;
     }
 
+
+    public function notificationAll(Request $request, Response $response)
+    {
+        return $response->withJson($this->notificationRepository->findAll());
+    }
+
     public function notificationUser(Request $request, Response $response, $id)
     {
         return $response->withJson($this->notificationRepository->findByUser($id['id']));
@@ -56,16 +62,10 @@ class NotificationApiController
     {
         return $response->withJson($this->notificationRepository->notificationsUnread($id['id']));
     }
-
     public function notificationRead(Request $request, Response $response, $id)
     {
         $this->notificationRepository->update($id['id']);
         return $response->withRedirect(('/notifications/'.$_SESSION['user']), 200);
-    }
-
-    public function notificationAll(Request $request, Response $response)
-    {
-        return $response->withJson($this->notificationRepository->findAll());
     }
 
 }

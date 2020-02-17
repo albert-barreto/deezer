@@ -7,16 +7,16 @@ namespace Deezer\Domain\Notification;
 interface NotificationRepository
 {
 
-    public function findAll(): array;
+    public function findAll();
 
-    public function findByUser(int $id): array;
+    public function findByUser(int $id);
 
-    public function notificationsRead(int $id): array;
+    public function notificationsRead(int $id);
 
-    public function notificationsUnread(int $id): array;
+    public function notificationsUnread(int $id);
 
-    public function insert(Notification $notification): void;
+    public function insert(Notification $notification);
 
-    public function update(int $id): void;
+    public function update(int $id);
 
 }
