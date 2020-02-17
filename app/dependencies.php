@@ -30,8 +30,8 @@ $container['renderer'] = function ($c) {
 
 // PDO
 $container['pdoConnection'] = function ($c) {
-    $db = $c->settings['database'];
 
+    $db = $c->settings['database'];
     $pdo = new PDO($db['conn'], $db['user'], $db['pass']);
 
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

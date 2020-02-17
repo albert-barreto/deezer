@@ -36,17 +36,15 @@ $app->group('/api', function () use ($app) {
     });
 });
 
-
 // UI
 $app->group('', function () use ($app) {
 
     $app->group('/notifications', function () use ($app) {
-
+        $this->get('/{id:[0-9]+}', 'notificationController:viewNotification');
         $this->post('/new', 'notificationController:newNotification');
-        //$this->put('/update', 'notificationController:updateNotification');
+        $this->put('/update', 'notificationController:updateNotification');
         $this->get('/add', 'notificationController:createNotification');
         $this->get('/read/{id:[0-9]+}', 'notificationController:notificationRead');
-        $this->get('/{id:[0-9]+}', 'notificationController:viewNotification');
     });
 
 })->add(new AuthenticationMiddleware($app->getContainer()));

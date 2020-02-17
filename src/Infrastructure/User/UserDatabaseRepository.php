@@ -36,7 +36,7 @@ class UserDatabaseRepository implements UserRepository
 
     public function findById(int $id): User
     {
-        $statement = $this->pdoConnection->prepare('SELECT * FROM ' . $this->table . ' WHERE id_user=?');
+        $statement = $this->pdoConnection->prepare('SELECT * FROM ' . $this->table . ' WHERE id=?');
         $statement->execute([$id]);
         $resultSet = $statement->fetchAll(PDO::FETCH_ASSOC);
 
@@ -60,7 +60,7 @@ class UserDatabaseRepository implements UserRepository
 
         $sql = 'INSERT INTO ' . $this->table . '(name, password, type) VALUES (:name, :password, :type)';
         $this->pdoConnection->prepare($sql)->execute($input_parameters);
-        //$this->logger->info('Executed user insert:' . json_encode($user));
+        $this->logger->info('Executed user insert:' . json_encode($user));
     }
 
     public function update(User $user): void
@@ -72,21 +72,21 @@ class UserDatabaseRepository implements UserRepository
             'type'      => $user->getType()
         ];
 
-        $sql = 'UPDATE '. $this->table . ' SET name = :name, password = :password, type = :type WHERE id_user = :id';
+        $sql = 'UPDATE '. $this->table . ' SET name = :name, password = :password, type = :type WHERE id = :id';
         $this->pdoConnection->prepare($sql)->execute($input_parameters);
-        //$this->logger->info('Executed user update:' . json_encode($user));
+        $this->logger->info('Executed user update:' . json_encode($user));
     }
 
     public function delete(int $id): void
     {
         $this->pdoConnection->prepare('DELETE FROM ' . $this->table . ' WHERE id = ?')->execute([$id]);
-        //$this->logger->info('Deleted user id:'. $id);
+        $this->logger->info('Deleted user id:'. $id);
     }
 
     private function mapRow($resultRow): User
     {
         return new User(
-            $resultRow['id_user'],
+            $resultRow['id'],
             $resultRow['name'],
             $resultRow['password'],
             $resultRow['type']

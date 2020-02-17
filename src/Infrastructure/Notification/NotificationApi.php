@@ -2,6 +2,7 @@
 
 namespace Deezer\Infrastructure\Notification;
 
+use Monolog\Logger;
 use Deezer\Domain\Notification\NotificationRepository;
 
 class NotificationApi
@@ -12,7 +13,12 @@ class NotificationApi
     /** @var NotificationRepository */
     private $notificationRepository;
 
-    public function __construct(NotificationRepository $notificationRepository, $logger)
+    /**
+     * NotificationApi constructor.
+     * @param NotificationRepository $notificationRepository
+     * @param $logger
+     */
+    public function __construct(NotificationRepository $notificationRepository, Logger $logger)
     {
         $this->logger = $logger;
         $this->notificationRepository = $notificationRepository;

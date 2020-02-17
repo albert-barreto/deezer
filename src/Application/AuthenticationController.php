@@ -34,13 +34,13 @@ class AuthenticationController
         $this->renderer->render($response, '/templates/login.html.twig');
     }
 
-    public function signOut(Request $request, Response $response): ResponseInterface
+    public function signOut(Request $request, Response $response)
     {
         $this->authentication->logout();
         return $response->withRedirect('/auth');
     }
 
-    public function postAuth(Request $request, Response $response)
+    public function postAuth(Request $request, Response $response): ResponseInterface
     {
         $auth = $this->authentication->attempt(
             $request->getParam('email'),

@@ -30,6 +30,7 @@ class NotificationController
     /**
      * NotificationController constructor.
      * @param Twig $twig
+     * @param Logger $logger
      * @param NotificationApi $notificationApi
      * @param NotificationRepository $notificationRepository
      */
@@ -41,7 +42,7 @@ class NotificationController
         $this->notificationRepository = $notificationRepository;
     }
 
-    public function viewNotification(Request $request, Response $response, $id)
+    public function viewNotification(Request $request, Response $response, $id): ResponseInterface
     {
         $variables = [
             'user'   => $_SESSION['name'],
@@ -50,6 +51,11 @@ class NotificationController
             'unread' => $this->notificationRepository->notificationsRead($id['id']),
             'notifications' => json_decode($this->notificationApi->notificationsByUser($id['id']))];
         return $this->renderer->render($response, '/templates/index.html.twig', $variables);
+    }
+
+    public function test(): ResponseInterface
+    {
+        echo "Aqui";exit();
     }
 
     public function createNotification(Request $request, Response $response): ResponseInterface
@@ -80,7 +86,6 @@ class NotificationController
 
     public function notificationAll(Request $request, Response $response)
     {
-        $this->logger->info("test logger");
         return $response->withJson($this->notificationRepository->findAll());
     }
 
