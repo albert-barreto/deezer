@@ -15,20 +15,14 @@ $app->group('/auth', function () use ($app) {
 
 // API
 $app->group('/api', function () use ($app) {
-
     $app->group('/notifications', function () use ($app) {
-
         $this->post('/new', 'notificationApiController:newNotification');
-
         $this->put('/read/{id:[0-9]+}', 'notificationApiController:notificationRead');
-
         $this->get('', 'notificationApiController:notificationAll');
         $this->get('/user/{id:[0-9]+}', 'notificationApiController:notificationUser');
         $this->get('/read/user/{id:[0-9]+}', 'notificationApiController:notificationReadUser');
         $this->get('/unread/user/{id:[0-9]+}', 'notificationApiController:notificationUnreadUser');
-
     });
-
     $app->group('/users', function () use ($app) {
         $this->get('', 'userController:getUsers');
         $this->get('/{id:[0-9]+}', 'userController:getUser');
@@ -38,17 +32,12 @@ $app->group('/api', function () use ($app) {
 
 // UI
 $app->group('', function () use ($app) {
-
     $app->group('/notifications', function () use ($app) {
-        $this->get('/{id:[0-9]+}', 'notificationController:viewNotification');
         $this->post('/new', 'notificationUiController:newNotification');
-        $this->put('/update', 'notificationUiController:updateNotification');
         $this->get('/add', 'notificationUiController:createNotification');
-
+        $this->put('/update', 'notificationUiController:updateNotification');
+        $this->get('/{id:[0-9]+}', 'notificationUiController:viewNotification');
         $this->get('/read/{id:[0-9]+}', 'notificationUiController:viewNotificationRead');
         $this->get('/unread/{id:[0-9]+}', 'notificationUiController:viewNotificationUnread');
-
-        //$this->get('/read/{id:[0-9]+}', 'notificationController:notificationRead');
     });
-
 })->add(new AuthenticationMiddleware($app->getContainer()));

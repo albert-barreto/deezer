@@ -2,14 +2,11 @@
 
 namespace Deezer\Application;
 
-use Exception;
 use Monolog\Logger;
 use Slim\Views\Twig;
 use Slim\Http\Request;
 use Slim\Http\Response;
-use Psr\Http\Message\ResponseInterface;
 
-use Deezer\Domain\Notification\Notification;
 use Deezer\Domain\Notification\NotificationRepository;
 use Deezer\Infrastructure\Notification\NotificationApi;
 
@@ -42,30 +39,29 @@ class NotificationApiController
         $this->notificationRepository = $notificationRepository;
     }
 
-
     public function notificationAll(Request $request, Response $response)
     {
-        return $response->withJson($this->notificationRepository->findAll());
+        return $response->withJson($this->notificationRepository->findAll(), 200);
     }
 
     public function notificationUser(Request $request, Response $response, $id)
     {
-        return $response->withJson($this->notificationRepository->findByUser($id['id']));
+        return $response->withJson($this->notificationRepository->findByUser($id['id']), 200);
     }
 
     public function notificationReadUser(Request $request, Response $response, $id)
     {
-        return $response->withJson($this->notificationRepository->notificationsRead($id['id']));
+        return $response->withJson($this->notificationRepository->notificationsRead($id['id']), 200);
     }
 
     public function notificationUnreadUser(Request $request, Response $response, $id)
     {
-        return $response->withJson($this->notificationRepository->notificationsUnread($id['id']));
+        return $response->withJson($this->notificationRepository->notificationsUnread($id['id']), 200);
     }
+
     public function notificationRead(Request $request, Response $response, $id)
     {
-        $this->notificationRepository->update($id['id']);
-        return $response->withRedirect(('/notifications/'.$_SESSION['user']), 200);
+        return $response->withJson($this->notificationRepository->update($id['id']), 200);
     }
 
 }

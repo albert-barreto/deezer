@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Deezer\Application;
-
 
 use Exception;
 use Monolog\Logger;

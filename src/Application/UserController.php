@@ -39,7 +39,7 @@ class UserController
         try {
             $this->userRepository->insert($user);
         } catch (Exception $e) {
-            //$this->logger->error('Error - Unable to create a new notification: '. $e->getMessage());
+            //$this->logger->error('Error - Unable to create a new user: '. $e->getMessage());
         }
         return $response->withRedirect('/users', 200);
     }
