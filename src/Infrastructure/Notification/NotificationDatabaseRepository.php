@@ -84,7 +84,7 @@ class NotificationDatabaseRepository implements NotificationRepository
     public function update(int $id): void
     {
         $parameters = ['id' => $id];
-        $sql = 'UPDATE notification SET status = 0 WHERE id_notification = :id';
+        $sql = 'UPDATE notification SET status = 0 WHERE id = :id';
         $this->pdoConnection->prepare($sql)->execute($parameters);
     }
 

@@ -18,10 +18,12 @@ USE `deezer` ;
 -- Table `deezer`.`content_type`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `deezer`.`content_type` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `type` VARCHAR(45) NULL,
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `type` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
-ENGINE = InnoDB;
+ENGINE = InnoDB
+AUTO_INCREMENT = 6
+DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
@@ -31,14 +33,12 @@ CREATE TABLE IF NOT EXISTS `deezer`.`artist` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL DEFAULT NULL,
   `style` VARCHAR(45) NULL DEFAULT NULL,
-  `content_type_id` INT NOT NULL,
+  `content_type_id` INT(11) NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_artist_content_type1_idx` (`content_type_id` ASC) VISIBLE,
   CONSTRAINT `fk_artist_content_type1`
     FOREIGN KEY (`content_type_id`)
-    REFERENCES `deezer`.`content_type` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    REFERENCES `deezer`.`content_type` (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `deezer`.`album` (
   `title` VARCHAR(45) NULL DEFAULT NULL,
   `year` INT(11) NULL DEFAULT NULL,
   `artist_id` INT(11) NOT NULL,
-  `content_type_id` INT NOT NULL,
+  `content_type_id` INT(11) NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_album_artist1_idx` (`artist_id` ASC) VISIBLE,
   INDEX `fk_album_content_type1_idx` (`content_type_id` ASC) VISIBLE,
@@ -60,9 +60,7 @@ CREATE TABLE IF NOT EXISTS `deezer`.`album` (
     REFERENCES `deezer`.`artist` (`id`),
   CONSTRAINT `fk_album_content_type1`
     FOREIGN KEY (`content_type_id`)
-    REFERENCES `deezer`.`content_type` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    REFERENCES `deezer`.`content_type` (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -76,28 +74,10 @@ CREATE TABLE IF NOT EXISTS `deezer`.`user` (
   `email` VARCHAR(100) NULL DEFAULT NULL,
   `password` VARCHAR(100) NULL DEFAULT NULL,
   `type` VARCHAR(45) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
--- Table `deezer`.`message`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `deezer`.`message` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `type` ENUM('recommandation', 'nouveauté', 'partage', 'information') NULL,
-  `description` TEXT NULL DEFAULT NULL,
-  `period` DATE NULL DEFAULT NULL,
-  `user_id` INT(11) NOT NULL,
-  `content_type_id` INT NOT NULL,
+  `content_type_id` INT(11) NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_message_user1_idx` (`user_id` ASC) VISIBLE,
-  INDEX `fk_message_content_type1_idx` (`content_type_id` ASC) VISIBLE,
-  CONSTRAINT `fk_message_user1`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `deezer`.`user` (`id`),
-  CONSTRAINT `fk_message_content_type1`
+  INDEX `fk_user_content_type1_idx` (`content_type_id` ASC) VISIBLE,
+  CONSTRAINT `fk_user_content_type1`
     FOREIGN KEY (`content_type_id`)
     REFERENCES `deezer`.`content_type` (`id`)
     ON DELETE NO ACTION
@@ -107,14 +87,38 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
+-- Table `deezer`.`message`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `deezer`.`message` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `type` ENUM('recommandation', 'nouveauté', 'partage', 'information') NULL DEFAULT NULL,
+  `description` TEXT NULL DEFAULT NULL,
+  `period` DATE NULL DEFAULT NULL,
+  `user_id` INT(11) NOT NULL,
+  `content_type_id` INT(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_message_user1_idx` (`user_id` ASC) VISIBLE,
+  INDEX `fk_message_content_type1_idx` (`content_type_id` ASC) VISIBLE,
+  CONSTRAINT `fk_message_content_type1`
+    FOREIGN KEY (`content_type_id`)
+    REFERENCES `deezer`.`content_type` (`id`),
+  CONSTRAINT `fk_message_user1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `deezer`.`user` (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
 -- Table `deezer`.`notification`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `deezer`.`notification` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
   `user_id` INT(11) NOT NULL,
   `message_id` INT(11) NOT NULL,
   `status` INT(1) NULL DEFAULT NULL,
-  `date` TIMESTAMP NULL DEFAULT NULL,
-  PRIMARY KEY (`user_id`, `message_id`),
+  `date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
   INDEX `fk_user_has_message_message1_idx` (`message_id` ASC) VISIBLE,
   INDEX `fk_user_has_message_user1_idx` (`user_id` ASC) VISIBLE,
   CONSTRAINT `fk_user_has_message_message1`
@@ -134,18 +138,16 @@ CREATE TABLE IF NOT EXISTS `deezer`.`playlist` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL DEFAULT NULL,
   `user_id` INT(11) NOT NULL,
-  `content_type_id` INT NOT NULL,
+  `content_type_id` INT(11) NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_playlist_user1_idx` (`user_id` ASC) VISIBLE,
   INDEX `fk_playlist_content_type1_idx` (`content_type_id` ASC) VISIBLE,
-  CONSTRAINT `fk_playlist_user1`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `deezer`.`user` (`id`),
   CONSTRAINT `fk_playlist_content_type1`
     FOREIGN KEY (`content_type_id`)
-    REFERENCES `deezer`.`content_type` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    REFERENCES `deezer`.`content_type` (`id`),
+  CONSTRAINT `fk_playlist_user1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `deezer`.`user` (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -158,7 +160,7 @@ CREATE TABLE IF NOT EXISTS `deezer`.`track` (
   `title` VARCHAR(100) NULL DEFAULT NULL,
   `description` VARCHAR(45) NULL DEFAULT NULL,
   `album_id` INT(11) NOT NULL,
-  `content_type_id` INT NOT NULL,
+  `content_type_id` INT(11) NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_track_album1_idx` (`album_id` ASC) VISIBLE,
   INDEX `fk_track_content_type1_idx` (`content_type_id` ASC) VISIBLE,
@@ -167,9 +169,7 @@ CREATE TABLE IF NOT EXISTS `deezer`.`track` (
     REFERENCES `deezer`.`album` (`id`),
   CONSTRAINT `fk_track_content_type1`
     FOREIGN KEY (`content_type_id`)
-    REFERENCES `deezer`.`content_type` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    REFERENCES `deezer`.`content_type` (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -201,7 +201,7 @@ CREATE TABLE IF NOT EXISTS `deezer`.`podcast` (
   `title` VARCHAR(45) NULL DEFAULT NULL,
   `year` INT(11) NULL DEFAULT NULL,
   `artist_id` INT(11) NOT NULL,
-  `content_type_id` INT NOT NULL,
+  `content_type_id` INT(11) NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_podcast_artist_idx` (`artist_id` ASC) VISIBLE,
   INDEX `fk_podcast_content_type1_idx` (`content_type_id` ASC) VISIBLE,
@@ -210,9 +210,7 @@ CREATE TABLE IF NOT EXISTS `deezer`.`podcast` (
     REFERENCES `deezer`.`artist` (`id`),
   CONSTRAINT `fk_podcast_content_type1`
     FOREIGN KEY (`content_type_id`)
-    REFERENCES `deezer`.`content_type` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    REFERENCES `deezer`.`content_type` (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 

@@ -20,9 +20,9 @@
         <p class="lead">Welcome {{ user }}.</p>
         <div>
             <ul class="list-inline">
-                <li class="list-inline-item"><a class="text-xs-center" href="#">All ({{ all | length }})</a></li>
-                <li class="list-inline-item"><a class="text-xs-center" href="#">Read ({{ read | length }})</a></li>
-                <li class="list-inline-item"><a class="text-xs-center" href="#">Unread ({{ unread | length }})</a></li>
+                <li class="list-inline-item"><a class="text-xs-center" href="/notifications/{{ userId }}">All ({{ all | length }})</a></li>
+                <li class="list-inline-item"><a class="text-xs-center" href="/notifications/read/{{ userId }}">Read ({{ read | length }})</a></li>
+                <li class="list-inline-item"><a class="text-xs-center" href="/notifications/unread/{{ userId }}">Unread ({{ unread | length }})</a></li>
             </ul>
         </div>
         <hr/>

@@ -46,16 +46,36 @@ class NotificationController
     {
         $variables = [
             'user'   => $_SESSION['name'],
+            'userId' => $_SESSION['user'],
             'all'    => $this->notificationRepository->findByUser($id['id']),
             'read'   => $this->notificationRepository->notificationsRead($id['id']),
-            'unread' => $this->notificationRepository->notificationsRead($id['id']),
+            'unread' => $this->notificationRepository->notificationsUnread($id['id']),
             'notifications' => json_decode($this->notificationApi->notificationsByUser($id['id']))];
         return $this->renderer->render($response, '/templates/index.html.twig', $variables);
     }
 
-    public function test(): ResponseInterface
+    public function viewNotificationRead(Request $request, Response $response, $id): ResponseInterface
     {
-        echo "Aqui";exit();
+        $variables = [
+            'user'   => $_SESSION['name'],
+            'userId' => $_SESSION['user'],
+            'all'    => $this->notificationRepository->findByUser($id['id']),
+            'read'   => $this->notificationRepository->notificationsRead($id['id']),
+            'unread' => $this->notificationRepository->notificationsUnread($id['id']),
+            'notifications' => json_decode($this->notificationApi->notificationsReadByUser($id['id']))];
+        return $this->renderer->render($response, '/templates/index.html.twig', $variables);
+    }
+
+    public function viewNotificationUnread(Request $request, Response $response, $id): ResponseInterface
+    {
+        $variables = [
+            'user'   => $_SESSION['name'],
+            'userId' => $_SESSION['user'],
+            'all'    => $this->notificationRepository->findByUser($id['id']),
+            'read'   => $this->notificationRepository->notificationsRead($id['id']),
+            'unread' => $this->notificationRepository->notificationsUnread($id['id']),
+            'notifications' => json_decode($this->notificationApi->notificationsUnreadByUser($id['id']))];
+        return $this->renderer->render($response, '/templates/index.html.twig', $variables);
     }
 
     public function createNotification(Request $request, Response $response): ResponseInterface

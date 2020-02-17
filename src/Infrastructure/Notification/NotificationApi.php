@@ -29,4 +29,14 @@ class NotificationApi
         return json_encode($this->notificationRepository->findByUser($id));
     }
 
+    public function notificationsReadByUser(int $id)
+    {
+        return json_encode($this->notificationRepository->notificationsRead($id));
+    }
+
+    public function notificationsUnreadByUser(int $id)
+    {
+        return json_encode($this->notificationRepository->notificationsUnread($id));
+    }
+
 }

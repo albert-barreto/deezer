@@ -44,7 +44,11 @@ $app->group('', function () use ($app) {
         $this->post('/new', 'notificationController:newNotification');
         $this->put('/update', 'notificationController:updateNotification');
         $this->get('/add', 'notificationController:createNotification');
-        $this->get('/read/{id:[0-9]+}', 'notificationController:notificationRead');
+
+        $this->get('/read/{id:[0-9]+}', 'notificationController:viewNotificationRead');
+        $this->get('/unread/{id:[0-9]+}', 'notificationController:viewNotificationUnread');
+
+        //$this->get('/read/{id:[0-9]+}', 'notificationController:notificationRead');
     });
 
 })->add(new AuthenticationMiddleware($app->getContainer()));
