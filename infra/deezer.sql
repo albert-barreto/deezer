@@ -179,93 +179,93 @@ CREATE TABLE IF NOT EXISTS `deezer`.`podcast` (
 
 
 -- -----------------------------------------------------
--- Table `deezer`.`message_has_artist`
+-- Table `deezer`.`message_artist`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `deezer`.`message_has_artist` (
-                                                             `message_id` INT(11) NOT NULL,
-                                                             `artist_id` INT(11) NOT NULL,
-                                                             PRIMARY KEY (`message_id`, `artist_id`),
-                                                             INDEX `fk_message_has_artist_artist1_idx` (`artist_id` ASC) VISIBLE,
-                                                             INDEX `fk_message_has_artist_message1_idx` (`message_id` ASC) VISIBLE,
-                                                             CONSTRAINT `fk_message_has_artist_message1`
-                                                                 FOREIGN KEY (`message_id`)
-                                                                     REFERENCES `deezer`.`message` (`id`)
-                                                                     ON DELETE NO ACTION
-                                                                     ON UPDATE NO ACTION,
-                                                             CONSTRAINT `fk_message_has_artist_artist1`
-                                                                 FOREIGN KEY (`artist_id`)
-                                                                     REFERENCES `deezer`.`artist` (`id`)
-                                                                     ON DELETE NO ACTION
-                                                                     ON UPDATE NO ACTION)
+CREATE TABLE IF NOT EXISTS `deezer`.`message_artist` (
+                                                         `message_id` INT(11) NOT NULL,
+                                                         `artist_id` INT(11) NOT NULL,
+                                                         PRIMARY KEY (`message_id`, `artist_id`),
+                                                         INDEX `fk_message_has_artist_artist1_idx` (`artist_id` ASC) VISIBLE,
+                                                         INDEX `fk_message_has_artist_message1_idx` (`message_id` ASC) VISIBLE,
+                                                         CONSTRAINT `fk_message_artist_message`
+                                                             FOREIGN KEY (`message_id`)
+                                                                 REFERENCES `deezer`.`message` (`id`)
+                                                                 ON DELETE NO ACTION
+                                                                 ON UPDATE NO ACTION,
+                                                         CONSTRAINT `fk_message_artist_artist`
+                                                             FOREIGN KEY (`artist_id`)
+                                                                 REFERENCES `deezer`.`artist` (`id`)
+                                                                 ON DELETE NO ACTION
+                                                                 ON UPDATE NO ACTION)
     ENGINE = InnoDB
     DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `deezer`.`message_has_track`
+-- Table `deezer`.`message_track`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `deezer`.`message_has_track` (
-                                                            `message_id` INT(11) NOT NULL,
-                                                            `track_id` INT(11) NOT NULL,
-                                                            PRIMARY KEY (`message_id`, `track_id`),
-                                                            INDEX `fk_message_has_track_track1_idx` (`track_id` ASC) VISIBLE,
-                                                            INDEX `fk_message_has_track_message1_idx` (`message_id` ASC) VISIBLE,
-                                                            CONSTRAINT `fk_message_has_track_message1`
-                                                                FOREIGN KEY (`message_id`)
-                                                                    REFERENCES `deezer`.`message` (`id`)
-                                                                    ON DELETE NO ACTION
-                                                                    ON UPDATE NO ACTION,
-                                                            CONSTRAINT `fk_message_has_track_track1`
-                                                                FOREIGN KEY (`track_id`)
-                                                                    REFERENCES `deezer`.`track` (`id`)
-                                                                    ON DELETE NO ACTION
-                                                                    ON UPDATE NO ACTION)
+CREATE TABLE IF NOT EXISTS `deezer`.`message_track` (
+                                                        `message_id` INT(11) NOT NULL,
+                                                        `track_id` INT(11) NOT NULL,
+                                                        PRIMARY KEY (`message_id`, `track_id`),
+                                                        INDEX `fk_message_has_track_track1_idx` (`track_id` ASC) VISIBLE,
+                                                        INDEX `fk_message_has_track_message1_idx` (`message_id` ASC) VISIBLE,
+                                                        CONSTRAINT `fk_message_track_message`
+                                                            FOREIGN KEY (`message_id`)
+                                                                REFERENCES `deezer`.`message` (`id`)
+                                                                ON DELETE NO ACTION
+                                                                ON UPDATE NO ACTION,
+                                                        CONSTRAINT `fk_message_track_track`
+                                                            FOREIGN KEY (`track_id`)
+                                                                REFERENCES `deezer`.`track` (`id`)
+                                                                ON DELETE NO ACTION
+                                                                ON UPDATE NO ACTION)
     ENGINE = InnoDB
     DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `deezer`.`message_has_album`
+-- Table `deezer`.`message_album`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `deezer`.`message_has_album` (
-                                                            `message_id` INT(11) NOT NULL,
-                                                            `album_id` INT(11) NOT NULL,
-                                                            PRIMARY KEY (`message_id`, `album_id`),
-                                                            INDEX `fk_message_has_album_album1_idx` (`album_id` ASC) VISIBLE,
-                                                            INDEX `fk_message_has_album_message1_idx` (`message_id` ASC) VISIBLE,
-                                                            CONSTRAINT `fk_message_has_album_message1`
-                                                                FOREIGN KEY (`message_id`)
-                                                                    REFERENCES `deezer`.`message` (`id`)
-                                                                    ON DELETE NO ACTION
-                                                                    ON UPDATE NO ACTION,
-                                                            CONSTRAINT `fk_message_has_album_album1`
-                                                                FOREIGN KEY (`album_id`)
-                                                                    REFERENCES `deezer`.`album` (`id`)
-                                                                    ON DELETE NO ACTION
-                                                                    ON UPDATE NO ACTION)
+CREATE TABLE IF NOT EXISTS `deezer`.`message_album` (
+                                                        `message_id` INT(11) NOT NULL,
+                                                        `album_id` INT(11) NOT NULL,
+                                                        PRIMARY KEY (`message_id`, `album_id`),
+                                                        INDEX `fk_message_has_album_album1_idx` (`album_id` ASC) VISIBLE,
+                                                        INDEX `fk_message_has_album_message1_idx` (`message_id` ASC) VISIBLE,
+                                                        CONSTRAINT `fk_message_album_message`
+                                                            FOREIGN KEY (`message_id`)
+                                                                REFERENCES `deezer`.`message` (`id`)
+                                                                ON DELETE NO ACTION
+                                                                ON UPDATE NO ACTION,
+                                                        CONSTRAINT `fk_message_album_album`
+                                                            FOREIGN KEY (`album_id`)
+                                                                REFERENCES `deezer`.`album` (`id`)
+                                                                ON DELETE NO ACTION
+                                                                ON UPDATE NO ACTION)
     ENGINE = InnoDB
     DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `deezer`.`message_has_podcast`
+-- Table `deezer`.`message_podcast`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `deezer`.`message_has_podcast` (
-                                                              `message_id` INT(11) NOT NULL,
-                                                              `podcast_id` INT(11) NOT NULL,
-                                                              PRIMARY KEY (`message_id`, `podcast_id`),
-                                                              INDEX `fk_message_has_podcast_podcast1_idx` (`podcast_id` ASC) VISIBLE,
-                                                              INDEX `fk_message_has_podcast_message1_idx` (`message_id` ASC) VISIBLE,
-                                                              CONSTRAINT `fk_message_has_podcast_message1`
-                                                                  FOREIGN KEY (`message_id`)
-                                                                      REFERENCES `deezer`.`message` (`id`)
-                                                                      ON DELETE NO ACTION
-                                                                      ON UPDATE NO ACTION,
-                                                              CONSTRAINT `fk_message_has_podcast_podcast1`
-                                                                  FOREIGN KEY (`podcast_id`)
-                                                                      REFERENCES `deezer`.`podcast` (`id`)
-                                                                      ON DELETE NO ACTION
-                                                                      ON UPDATE NO ACTION)
+CREATE TABLE IF NOT EXISTS `deezer`.`message_podcast` (
+                                                          `message_id` INT(11) NOT NULL,
+                                                          `podcast_id` INT(11) NOT NULL,
+                                                          PRIMARY KEY (`message_id`, `podcast_id`),
+                                                          INDEX `fk_message_has_podcast_podcast1_idx` (`podcast_id` ASC) VISIBLE,
+                                                          INDEX `fk_message_has_podcast_message1_idx` (`message_id` ASC) VISIBLE,
+                                                          CONSTRAINT `fk_message_podcast_message`
+                                                              FOREIGN KEY (`message_id`)
+                                                                  REFERENCES `deezer`.`message` (`id`)
+                                                                  ON DELETE NO ACTION
+                                                                  ON UPDATE NO ACTION,
+                                                          CONSTRAINT `fk_message_podcast_podcast`
+                                                              FOREIGN KEY (`podcast_id`)
+                                                                  REFERENCES `deezer`.`podcast` (`id`)
+                                                                  ON DELETE NO ACTION
+                                                                  ON UPDATE NO ACTION)
     ENGINE = InnoDB
     DEFAULT CHARACTER SET = utf8;
 
@@ -279,12 +279,12 @@ CREATE TABLE IF NOT EXISTS `deezer`.`message_has_playlist` (
                                                                PRIMARY KEY (`message_id`, `playlist_id`),
                                                                INDEX `fk_message_has_playlist_playlist1_idx` (`playlist_id` ASC) VISIBLE,
                                                                INDEX `fk_message_has_playlist_message1_idx` (`message_id` ASC) VISIBLE,
-                                                               CONSTRAINT `fk_message_has_playlist_message1`
+                                                               CONSTRAINT `fk_message_playlist_message`
                                                                    FOREIGN KEY (`message_id`)
                                                                        REFERENCES `deezer`.`message` (`id`)
                                                                        ON DELETE NO ACTION
                                                                        ON UPDATE NO ACTION,
-                                                               CONSTRAINT `fk_message_has_playlist_playlist1`
+                                                               CONSTRAINT `fk_message_playlist_playlist`
                                                                    FOREIGN KEY (`playlist_id`)
                                                                        REFERENCES `deezer`.`playlist` (`id`)
                                                                        ON DELETE NO ACTION
