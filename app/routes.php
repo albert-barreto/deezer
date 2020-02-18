@@ -19,6 +19,7 @@ $app->group('/api', function () use ($app) {
     $app->group('/notifications', function () use ($app) {
         $this->get('', 'notificationApiController:notificationAll');
         $this->get('/user/{id:[0-9]+}', 'notificationApiController:notificationUser');
+        $this->get('/total/user/{id:[0-9]+}', 'notificationApiController:notificationTotal');
         $this->get('/read/user/{id:[0-9]+}', 'notificationApiController:notificationReadUser');
         $this->get('/unread/user/{id:[0-9]+}', 'notificationApiController:notificationUnreadUser');
     });

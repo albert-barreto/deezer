@@ -33,6 +33,15 @@ class NotificationApiController
         return $response->withJson($this->content($this->notificationRepository->findById($id['id'])), 200);
     }
 
+    public function notificationTotal(Request $request, Response $response, $id)
+    {
+        $data = [
+            'read'   => count($this->notificationRepository->notificationsRead($id['id'])),
+            'unread' => count($this->notificationRepository->notificationsUnread($id['id'])),
+            'total'  => count($this->notificationRepository->notificationsRead($id['id'])) + count($this->notificationRepository->notificationsUnread($id['id']))
+        ];
+        return $response->withJson(['notifications' => $data], 200);
+    }
 
     public function notificationUser(Request $request, Response $response, $id)
     {
