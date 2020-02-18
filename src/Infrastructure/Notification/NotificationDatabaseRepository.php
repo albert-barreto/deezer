@@ -61,6 +61,7 @@ class NotificationDatabaseRepository implements NotificationRepository
 
     public function notificationContent($messageId, $content)
     {
+        $type = null;
         switch ($content) {
             case 'album':
                 $type = ['type' => ucfirst($content)];

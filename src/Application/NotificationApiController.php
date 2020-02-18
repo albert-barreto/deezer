@@ -56,31 +56,36 @@ class NotificationApiController
                 case 'Album':
                     $album['content'] = $this->notificationRepository->notificationContent($notification['message_id'], 'album');
                     unset($notification['message_id']);
+                    array_filter($notification);
                     $result[] = array_merge($notification, $album);
                     break;
                 case 'Podcast':
                     $podcast['content'] = $this->notificationRepository->notificationContent($notification['message_id'], 'podcast');
                     unset($notification['message_id']);
+                    array_filter($notification);
                     $result[] = array_merge($notification, $podcast);
                     break;
                 case 'Artist':
                     $artist['content'] = $this->notificationRepository->notificationContent($notification['message_id'], 'artist');
                     unset($notification['message_id']);
+                    array_filter($notification);
                     $result[] = array_merge($notification, $artist);
                     break;
                 case 'Playlist':
                     $playlist['content'] = $this->notificationRepository->notificationContent($notification['message_id'], 'playlist');
                     unset($notification['message_id']);
+                    array_filter($notification);
                     $result[] = array_merge($notification, $playlist);
                     break;
                 case 'Track':
                     $track['content'] = $this->notificationRepository->notificationContent($notification['message_id'], 'track');
                     unset($notification['message_id']);
+                    array_filter($notification);
                     $result[] = array_merge($notification, $track);
                     break;
                 default:
                     unset($notification['message_id']);
-                    $result[] = $notification;
+                    $result[] = array_filter($notification);
                     break;
             }
         }
