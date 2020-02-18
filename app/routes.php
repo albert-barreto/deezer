@@ -15,13 +15,17 @@ $app->group('/auth', function () use ($app) {
 
 // API
 $app->group('/api', function () use ($app) {
+
     $app->group('/notifications', function () use ($app) {
-        $this->post('/new', 'notificationApiController:newNotification');
-        $this->put('/read/{id:[0-9]+}', 'notificationApiController:notificationRead');
         $this->get('', 'notificationApiController:notificationAll');
         $this->get('/user/{id:[0-9]+}', 'notificationApiController:notificationUser');
         $this->get('/read/user/{id:[0-9]+}', 'notificationApiController:notificationReadUser');
         $this->get('/unread/user/{id:[0-9]+}', 'notificationApiController:notificationUnreadUser');
+    });
+    $app->group('/notification', function () use ($app) {
+        $this->get('/{id:[0-9]+}', 'notificationApiController:notification');
+        $this->post('/new', 'notificationApiController:newNotification');
+        $this->put('/read/{id:[0-9]+}', 'notificationApiController:notificationRead');
     });
     $app->group('/users', function () use ($app) {
         $this->get('', 'userController:getUsers');

@@ -5,14 +5,145 @@ info:
   description: >-
     API createad to interact with the notification center.
   contact:
-    name: Albert Barreto
-    email: albert.barreto@outlook.com
-host: localhost:8787
-basePath: /api
+    name: "Albert Barreto"
+    email: "albert.barreto@outlook.com"
+host: "localhost:8787"
+basePath: "/api"
 schemes:
-  - http
+  - "http"
 paths:
-  /notification/read:
+  /notifications:
+    get:
+      tags:
+        - "notifications"
+      summary: "finds all notifications"
+      consumes:
+        - "multipart/form-data"
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "returns details for all notifications available"
+          schema:
+            type: "array"
+            items:
+              $ref: '#/definitions/notifications'
+
+  /notification/{id}:
+    get:
+      tags:
+        - "notifications"
+      summary: "finds notifications by id"
+      consumes:
+        - "multipart/form-data"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "path"
+          name: "id"
+          type: "integer"
+          description: "notification id"
+          required: true
+      responses:
+        200:
+          description: "returns details for specific notification"
+          schema:
+            $ref: '#/definitions/notifications'
+        400:
+          description: "Invalid parameter"
+
+  /notifications/user/{id}:
+    get:
+      tags:
+        - "notifications"
+      summary: "finds notifications by user id"
+      consumes:
+        - "multipart/form-data"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "path"
+          name: "id"
+          type: "integer"
+          description: "notification id"
+          required: true
+      responses:
+        200:
+          description: "returns details for specific notification"
+          schema:
+            $ref: '#/definitions/notifications'
+        400:
+          description: "Invalid parameter"
+
+  /notifications/read/user/{id}:
+    get:
+      tags:
+        - "notifications"
+      summary: "finds notifications read by user id"
+      consumes:
+        - "multipart/form-data"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "path"
+          name: "id"
+          type: "integer"
+          description: "notification id"
+          required: true
+      responses:
+        200:
+          description: "returns details for specific notification"
+          schema:
+            $ref: '#/definitions/notifications'
+        400:
+          description: "Invalid parameter"
+
+  /notifications/unread/user/{id}:
+    get:
+      tags:
+        - "notifications"
+      summary: "finds notifications unread by user id"
+      consumes:
+        - "multipart/form-data"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "path"
+          name: "id"
+          type: "integer"
+          description: "notification id"
+          required: true
+      responses:
+        200:
+          description: "returns details for specific notification"
+          schema:
+            $ref: '#/definitions/notifications'
+        400:
+          description: "Invalid parameter"
+
+  /notification/read/{id}:
+    put:
+      tags:
+        - "notifications"
+      summary: "update a notification as read by id"
+      consumes:
+        - "multipart/form-data"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "path"
+          name: "id"
+          type: "integer"
+          description: "notification id"
+          required: true
+      responses:
+        200:
+          description: "returns details for specific notification"
+          schema:
+            $ref: '#/definitions/notifications'
+        400:
+          description: "Invalid parameter"
+  /notification:
     post:
       tags:
         - "notifications"
@@ -52,150 +183,18 @@ paths:
         405:
           description: "Invalid input"
 
-  /notification/read/{id}:
-    put:
-      tags:
-        - notifications
-      summary: update a notification as read by id.
-      consumes:
-        - multipart/form-data
-      produces:
-        - application/json
-      parameters:
-        - in: path
-          name: id
-          type: integer
-          description: notification id.
-          required: true
-      responses:
-        '200':
-          description: returns details for specific notification.
-          schema:
-            $ref: '#/definitions/notifications'
-        '400':
-          description: Invalid parameter.
-
-  /notifications:
-    get:
-      tags:
-        - notifications
-      summary: finds all notifications.
-      consumes:
-        - multipart/form-data
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: returns details for all notifications available.
-          schema:
-            type: "array"
-            items:
-              $ref: '#/definitions/notifications'
-
-  /notification/{id}:
-    get:
-      tags:
-        - notifications
-      summary: finds notifications by id.
-      consumes:
-        - multipart/form-data
-      produces:
-        - application/json
-      parameters:
-        - in: path
-          name: id
-          type: integer
-          description: notification id.
-          required: true
-      responses:
-        '200':
-          description: returns details for specific notification.
-          schema:
-            $ref: '#/definitions/notifications'
-        '400':
-          description: Invalid parameter.
-
-  /notification/user/{id}:
-    get:
-      tags:
-        - notifications
-      summary: finds notifications by user id.
-      consumes:
-        - multipart/form-data
-      produces:
-        - application/json
-      parameters:
-        - in: path
-          name: id
-          type: integer
-          description: notification id.
-          required: true
-      responses:
-        '200':
-          description: returns details for specific notification.
-          schema:
-            $ref: '#/definitions/notifications'
-        '400':
-          description: Invalid parameter.
-
-  /notification/read/user/{id}:
-    get:
-      tags:
-        - notifications
-      summary: finds notifications read by user id.
-      consumes:
-        - multipart/form-data
-      produces:
-        - application/json
-      parameters:
-        - in: path
-          name: id
-          type: integer
-          description: notification id.
-          required: true
-      responses:
-        '200':
-          description: returns details for specific notification.
-          schema:
-            $ref: '#/definitions/notifications'
-        '400':
-          description: Invalid parameter.
-
-  /notification/unread/user/{id}:
-    get:
-      tags:
-        - notifications
-      summary: finds notifications unread by user id.
-      consumes:
-        - multipart/form-data
-      produces:
-        - application/json
-      parameters:
-        - in: path
-          name: id
-          type: integer
-          description: notification id.
-          required: true
-      responses:
-        '200':
-          description: returns details for specific notification.
-          schema:
-            $ref: '#/definitions/notifications'
-        '400':
-          description: Invalid parameter.
-
   /users:
     get:
       tags:
-        - users
-      summary: finds all users.
+        - "users"
+      summary: "finds all users"
       consumes:
-        - multipart/form-data
+        - "multipart/form-data"
       produces:
-        - application/json
+        - "application/json"
       responses:
         '200':
-          description: returns details for all users.
+          description: "returns details for all users"
           schema:
             type: "array"
             items:
@@ -204,64 +203,116 @@ paths:
   /user/{id}:
     get:
       tags:
-        - users
-      summary: find user by id.
+        - "users"
+      summary: "find user by id"
       consumes:
-        - multipart/form-data
+        - "multipart/form-data"
       produces:
-        - application/json
+        - "application/json"
       parameters:
-        - in: path
-          name: id
-          type: integer
-          description: user id.
+        - in: "path"
+          name: "id"
+          type: "integer"
+          description: "user id"
           required: true
       responses:
-        '200':
-          description: returns details for specific user.
+        200:
+          description: "returns details for specific user"
           schema:
             $ref: '#/definitions/users'
-        '400':
-          description: Invalid parameter.
-
+        400:
+          description: "Invalid parameter"
 
 definitions:
   notifications:
-    type: object
+    type: "object"
     properties:
       id_notification:
-        type: integer
-        description: notification id.
+        type: "integer"
+        description: "notification id"
       type:
-        type: integer
-        description: notification type .
+        type: "string"
+        description: "notification type"
+        enum:
+          - "recommandation"
+          - "nouveauté"
+          - "partage"
+          - "information"
       content:
-        type: string
-        description: notification content.
+        type: "string"
+        description: "notification type"
+        enum:
+          - "artist"
+          - "album"
+          - "playlist"
+          - "podcast"
+          - "track"
       period:
-        type: string
-        description: notification period.
+        type: "string"
+        description: "notification period"
       description:
-        type: string
-        description: notification description.
+        type: "string"
+        description: "notification description"
       date:
-        type: string
-        description: notification date.
+        type: "string"
+        description: "notification date"
       status:
-        type: integer
-        description: notification status.
+        type: "integer"
+        description: "notification status"
+  artist:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+        description: "artist name"
+      style:
+        type: "string"
+        description: "artist style"
+  album:
+    type: "object"
+    properties:
+      title:
+        type: "string"
+        description: "album title"
+      year:
+        type: "string"
+        description: "album year"
+  playlist:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+        description: "playlist name"
+  podcast:
+    type: "object"
+    properties:
+      title:
+        type: "string"
+        description: "podcast title"
+      year:
+        type: "string"
+        description: "podcast year"
+  track:
+    type: "object"
+    properties:
+      title:
+        type: "string"
+        description: "Track title"
+      description:
+        type: "string"
+        description: "Track description"
   users:
-    type: object
+    type: "object"
     properties:
       id_user:
-        type: integer
-        description: user id.
+        type: "integer"
+        description: "user id"
       name:
-        type: string
-        description: name user.
+        type: "string"
+        description: "name user"
       email:
-        type: string
-        description: email user.
+        type: "string"
+        description: "email user"
       type:
-        type: string
-        description: user type.
+        type: "string"
+        description: "user type"

@@ -3,13 +3,16 @@
 namespace Deezer\Infrastructure\User;
 
 use PDO;
+use Monolog\Logger;
 use Deezer\Domain\User\User;
 use Deezer\Domain\User\UserRepository;
 
 class UserDatabaseRepository implements UserRepository
 {
 
+    /** @var Logger */
     protected $logger;
+
     private $table = 'user';
 
     /** @var PDO $pdoConnection */

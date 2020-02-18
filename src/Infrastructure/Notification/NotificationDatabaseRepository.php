@@ -29,6 +29,16 @@ class NotificationDatabaseRepository implements NotificationRepository
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function findById(int $id): array
+    {
+        $statement = $this->pdoConnection->prepare(
+            'SELECT notification.id, message.id as message_id, message.type, message.content, DATEDIFF(message.period, CURDATE()) as period, user.name as author, message.description, notification.date, notification.status
+	                    FROM deezer.notification INNER JOIN message ON notification.message_id = message.id INNER JOIN user ON user.id = notification.user_id WHERE notification.id = ? ORDER BY notification.date DESC');
+
+        $statement->execute([$id]);
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function findByUser(int $id): array
     {
         $statement = $this->pdoConnection->prepare(

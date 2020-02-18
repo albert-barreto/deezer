@@ -9,6 +9,8 @@ interface NotificationRepository
 
     public function findAll(): array;
 
+    public function findById(int $id): array;
+
     public function findByUser(int $id): array;
 
     public function notificationsRead(int $id): array;

@@ -28,6 +28,12 @@ class NotificationApiController
         return $response->withJson($this->content($this->notificationRepository->findAll()), 200);
     }
 
+    public function notification(Request $request, Response $response, $id)
+    {
+        return $response->withJson($this->content($this->notificationRepository->findById($id['id'])), 200);
+    }
+
+
     public function notificationUser(Request $request, Response $response, $id)
     {
         return $response->withJson($this->content($this->notificationRepository->findByUser($id['id']), 200));
