@@ -23,7 +23,7 @@ class NotificationDatabaseRepository implements NotificationRepository
     public function findAll(): array
     {
         $statement = $this->pdoConnection->query(
-            'SELECT notification.id, message.id as message_id, message.type, message.period, user.name as author, message.description, notification.date, notification.status, message.content
+            'SELECT notification.id, message.id as message_id, message.type, message.content, DATEDIFF(message.period, CURDATE()) as period, user.name as author, message.description, notification.date, notification.status
 	                    FROM deezer.notification INNER JOIN message ON notification.message_id = message.id INNER JOIN user ON user.id = notification.user_id ORDER BY notification.date DESC');
 
         return $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -32,7 +32,7 @@ class NotificationDatabaseRepository implements NotificationRepository
     public function findByUser(int $id): array
     {
         $statement = $this->pdoConnection->prepare(
-            'SELECT notification.id, message.id as message_id, message.type, message.period, user.name as author, message.description, notification.date, notification.status, message.content
+            'SELECT notification.id, message.id as message_id, message.type, DATEDIFF(message.period, CURDATE()) as period, user.name as author, message.description, notification.date, notification.status, message.content
 	                    FROM deezer.notification INNER JOIN message ON notification.message_id = message.id INNER JOIN user ON user.id = notification.user_id WHERE notification.user_id = ? ORDER BY notification.date DESC');
 
         $statement->execute([$id]);
@@ -42,7 +42,7 @@ class NotificationDatabaseRepository implements NotificationRepository
     public function notificationsRead(int $id): array
     {
         $statement = $this->pdoConnection->prepare(
-            'SELECT notification.id, message.id as message_id, message.type, message.period, user.name as author, message.description, notification.date, notification.status, message.content
+            'SELECT notification.id, message.id as message_id, message.type, DATEDIFF(message.period, CURDATE()) as period, user.name as author, message.description, notification.date, notification.status, message.content
 	                    FROM deezer.notification INNER JOIN message ON notification.message_id = message.id INNER JOIN user ON user.id = notification.user_id WHERE notification.user_id = ? AND notification.status = 1 ORDER BY notification.date DESC');
 
         $statement->execute([$id]);
@@ -52,7 +52,7 @@ class NotificationDatabaseRepository implements NotificationRepository
     public function notificationsUnread(int $id): array
     {
         $statement = $this->pdoConnection->prepare(
-            'SELECT notification.id, message.id as message_id, message.type, message.period, user.name as author, message.description, notification.date, notification.status, message.content
+            'SELECT notification.id, message.id as message_id, message.type,DATEDIFF(message.period, CURDATE()) as period, user.name as author, message.description, notification.date, notification.status, message.content
 	                    FROM deezer.notification INNER JOIN message ON notification.message_id = message.id INNER JOIN user ON user.id = notification.user_id WHERE notification.user_id = ? AND notification.status = 0 ORDER BY notification.date DESC');
 
         $statement->execute([$id]);

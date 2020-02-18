@@ -2,6 +2,7 @@
 
 namespace Deezer\Application;
 
+use DateTime;
 use Slim\Http\Request;
 use Slim\Http\Response;
 
