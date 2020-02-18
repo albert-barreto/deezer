@@ -36,11 +36,7 @@ class UserController
         $user->setPassword($request->getParsedBody()['password']);
         $user->setType($request->getParsedBody()['type']);
 
-        try {
-            $this->userRepository->insert($user);
-        } catch (Exception $e) {
-            //$this->logger->error('Error - Unable to create a new user: '. $e->getMessage());
-        }
+        $this->userRepository->insert($user);
         return $response->withRedirect('/users', 200);
     }
 

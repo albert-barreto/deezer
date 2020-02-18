@@ -74,7 +74,7 @@ $container['notificationRepository'] = function ($c) {
 };
 
 $container['notificationApiController'] = function ($c) {
-    return new NotificationApiController($c->renderer, $c->logger, $c->notificationApi, $c->notificationRepository);
+    return new NotificationApiController($c->notificationRepository);
 };
 
 $container['notificationUiController'] = function ($c) {
