@@ -317,7 +317,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `email`, `password`, `type`) VALUES
-(1, 'Dezzer', 'deezer@deezer.cm', '202cb962ac59075b964b07152d234b70', 'administrator'),
+(1, 'Dezzer', 'deezer@deezer.com', '202cb962ac59075b964b07152d234b70', 'administrator'),
 (2, 'user 1', 'user1@deezer.com', '202cb962ac59075b964b07152d234b70', 'user'),
 (3, 'user 2', 'user2@deezer.com', '202cb962ac59075b964b07152d234b70', 'user');
 

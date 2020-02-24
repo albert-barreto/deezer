@@ -15,7 +15,6 @@ $app->group('/auth', function () use ($app) {
 
 // API
 $app->group('/api', function () use ($app) {
-
     $app->group('/notifications', function () use ($app) {
         $this->get('', 'notificationApiController:notificationAll');
         $this->get('/user/{id:[0-9]+}', 'notificationApiController:notificationUser');
