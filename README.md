@@ -7,25 +7,30 @@ Deezer Test Tech Application Notification Center
 When the application is running in development, you can check the endpoints with all the notifications.
 
 ### Requirements
+
+#### Local Environment
 * PHP
 * MySQL
 * Composer
 
-### Docker Environment
+#### Docker Environment
+* Docker
+
 You can also run the application, and the database using the Docker environment. In that way, it's not necessary to install the requirements on your local machine.
 
 ## Run Application
 In the root directory of the project, download and install dependencies with composer:
-    ```shell
-    composer -v install
+```shell
+composer -v install
+```
     
-To run the application in development, you can run these commands 
+To run the application in local environment, you can run these commands 
 
 ```bash
 composer start
 ```
 
-Or, start your Docker environment and from the root directory of the project, run the command: 
+Or, run the application in containers, start your Docker environment and from the root directory of the project, run the command: 
 
 ```shell
 docker-compose up -d
