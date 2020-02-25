@@ -17,8 +17,8 @@ interface NotificationRepository
 
     public function notificationsUnread(int $id): array;
 
-    public function insert(Notification $notification);
+    public function insert(Notification $notification): void;
 
-    public function update(int $id);
+    public function update(int $id): void;
 
 }

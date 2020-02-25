@@ -4,6 +4,8 @@
 namespace Deezer\Domain\Notification;
 
 
+use phpDocumentor\Reflection\Types\String_;
+
 class Notification
 {
 
@@ -31,31 +33,31 @@ class Notification
     }
 
     /**
-     * @return null
+     * @return string
      */
-    public function getAuthor()
+    public function getAuthor(): string
     {
         return $this->author;
     }
 
     /**
-     * @param null $author
+     * @param string $author
      */
-    public function setAuthor($author): void
+    public function setAuthor(string $author): void
     {
         $this->author = $author;
     }
 
     /**
-     * @return null
+     * @return string
      */
-    public function getContent()
+    public function getContent(): string
     {
         return $this->content;
     }
 
     /**
-     * @param null $content
+     * @param string $content
      */
     public function setContent($content): void
     {
@@ -63,15 +65,15 @@ class Notification
     }
 
     /**
-     * @return null
+     * @return string
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
 
     /**
-     * @param null $description
+     * @param string $description
      */
     public function setDescription($description): void
     {
@@ -79,15 +81,15 @@ class Notification
     }
 
     /**
-     * @return null
+     * @return string
      */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
 
     /**
-     * @param null $type
+     * @param string $type
      */
     public function setType($type): void
     {

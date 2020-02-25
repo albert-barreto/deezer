@@ -24,7 +24,7 @@ class UserDatabaseRepository implements UserRepository
         $this->pdoConnection = $pdoConnection;
     }
 
-    public function findAll()
+    public function findAll(): array
     {
         $statement = $this->pdoConnection->query('SELECT * FROM ' . $this->table);
         $resultSet = $statement->fetchAll(PDO::FETCH_ASSOC);

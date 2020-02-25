@@ -27,13 +27,15 @@ class UserTest extends TestCase
         );
     }
 
+    public function testGettersAndSettersName(): void
+    {
+        $this->user->setName('deezer');
+        $this->assertEquals($this->user->getName(), 'deezer');
+    }
+
     public function testGettersAndSettersType(): void
     {
-        $this->user->setType(7);
-        $this->assertEquals(
-            7,
-            $this->user->getType() === 7,
-            'When you set the ID, the response must match the value set.'
-        );
+        $this->user->setType('user');
+        $this->assertEquals($this->user->getType(), 'user');
     }
 }

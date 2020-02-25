@@ -100,7 +100,7 @@ class NotificationDatabaseRepository implements NotificationRepository
         return array_merge($type, $statement->fetchAll(PDO::FETCH_ASSOC)[0]);
     }
 
-    public function insert(Notification $notification)
+    public function insert(Notification $notification): void
     {
         $parameters = [
             'author' => $notification->getAuthor(),
@@ -114,7 +114,7 @@ class NotificationDatabaseRepository implements NotificationRepository
         $this->pdoConnection->prepare($sql)->execute($parameters);
     }
 
-    public function update(int $id)
+    public function update(int $id): void
     {
         $parameters = ['id' => $id];
         $sql = 'UPDATE notification SET status = 0 WHERE id = :id';

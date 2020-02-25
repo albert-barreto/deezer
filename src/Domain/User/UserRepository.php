@@ -6,11 +6,11 @@ namespace Deezer\Domain\User;
 
 interface UserRepository
 {
-    public function findAll();
+    public function findAll(): array;
 
     public function findById(int $id): User;
 
-    public function findByEmail(string $email):User;
+    public function findByEmail(string $email): User;
 
     public function insert(User $user): void;
 
