@@ -1,10 +1,7 @@
 <?php
 
-
 namespace Deezer\Domain\Notification;
 
-
-use phpDocumentor\Reflection\Types\String_;
 
 class Notification
 {

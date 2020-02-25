@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Deezer\Domain\User;
 
 
