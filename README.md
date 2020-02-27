@@ -38,6 +38,13 @@ docker-compose up -d
 
 After that, open `http://localhost:8787` in your browser.
 
+### Run tests
+Run PHPUnit through composer alias:
+
+```shell
+composer test
+```
+
 #### Framework and libraries
 Composer is used for Dependency management
 - Config file: [composer.json]()

@@ -9,9 +9,8 @@ use Slim\Http\Request;
 use Slim\Http\Response;
 use Psr\Http\Message\ResponseInterface;
 
-use Deezer\Domain\Notification\Notification;
-use Deezer\Domain\Notification\NotificationRepository;
 use Deezer\Infrastructure\Notification\NotificationApi;
+use Deezer\Domain\Notification\{Notification, NotificationRepository};
 
 class NotificationUiController
 {

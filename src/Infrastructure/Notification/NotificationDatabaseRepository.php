@@ -3,8 +3,7 @@
 namespace Deezer\Infrastructure\Notification;
 
 use PDO;
-use Deezer\Domain\Notification\Notification;
-use Deezer\Domain\Notification\NotificationRepository;
+use Deezer\Domain\Notification\{Notification, NotificationRepository};
 
 class NotificationDatabaseRepository implements NotificationRepository
 {

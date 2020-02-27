@@ -3,15 +3,12 @@
 use Slim\Views\Twig;
 use Slim\Views\TwigExtension;
 
-use Deezer\Application\UserController;
-use Deezer\Application\NotificationUiController;
-use Deezer\Application\NotificationApiController;
-use Deezer\Application\AuthenticationController;
+use Deezer\Application\{UserController, AuthenticationController};
+use Deezer\Application\{NotificationApiController, NotificationUiController};
 
 use Deezer\Infrastructure\Middleware\Authentication;
 use Deezer\Infrastructure\User\UserDatabaseRepository;
-use Deezer\Infrastructure\Notification\NotificationApi;
-use Deezer\Infrastructure\Notification\NotificationDatabaseRepository;
+use Deezer\Infrastructure\Notification\{NotificationApi,NotificationDatabaseRepository};
 
 $container = $app->getContainer();
 

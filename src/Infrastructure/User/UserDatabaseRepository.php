@@ -4,8 +4,8 @@ namespace Deezer\Infrastructure\User;
 
 use PDO;
 use Monolog\Logger;
-use Deezer\Domain\User\User;
-use Deezer\Domain\User\UserRepository;
+
+use Deezer\Domain\User\{User, UserRepository};
 
 class UserDatabaseRepository implements UserRepository
 {

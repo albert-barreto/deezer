@@ -6,8 +6,7 @@ use Exception;
 use Slim\Http\Request;
 use Slim\Http\Response;
 
-use Deezer\Domain\User\User;
-use Deezer\Domain\User\UserRepository;
+use Deezer\Domain\User\{User, UserRepository};
 
 class UserController
 {
