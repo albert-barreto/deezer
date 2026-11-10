@@ -44,7 +44,7 @@ class AuthenticationController
     {
         $auth = $this->authentication->attempt(
             $request->getParam('email'),
-            md5($request->getParam('password'))
+            (string) $request->getParam('password')
         );
 
         if(!$auth){
