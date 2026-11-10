@@ -308,7 +308,7 @@ CREATE TABLE `user` (
                         `id` int(11) NOT NULL,
                         `name` varchar(45) DEFAULT NULL,
                         `email` varchar(100) DEFAULT NULL,
-                        `password` varchar(100) DEFAULT NULL,
+                        `password` varchar(255) DEFAULT NULL,
                         `type` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -317,9 +317,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `email`, `password`, `type`) VALUES
-(1, 'Dezzer', 'deezer@deezer.com', '202cb962ac59075b964b07152d234b70', 'administrator'),
-(2, 'user 1', 'user1@deezer.com', '202cb962ac59075b964b07152d234b70', 'user'),
-(3, 'user 2', 'user2@deezer.com', '202cb962ac59075b964b07152d234b70', 'user');
+(1, 'Dezzer', 'deezer@deezer.com', '$2y$10$hycvdzGNHCLxcBu3Vuluiel2NpanXfyQaC.ErqwSmgjUD1nx6Cqui', 'administrator'),
+(2, 'user 1', 'user1@deezer.com', '$2y$10$hycvdzGNHCLxcBu3Vuluiel2NpanXfyQaC.ErqwSmgjUD1nx6Cqui', 'user'),
+(3, 'user 2', 'user2@deezer.com', '$2y$10$hycvdzGNHCLxcBu3Vuluiel2NpanXfyQaC.ErqwSmgjUD1nx6Cqui', 'user');
 
 --
 -- Indexes for dumped tables

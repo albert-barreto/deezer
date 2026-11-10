@@ -57,7 +57,7 @@ class UserDatabaseRepository implements UserRepository
     {
         $input_parameters = [
             'name' => $user->getName(),
-            'password' => md5($user->getPassword()),
+            'password' => password_hash($user->getPassword(), PASSWORD_DEFAULT),
             'type' => $user->getType()
         ];
 
@@ -71,7 +71,7 @@ class UserDatabaseRepository implements UserRepository
         $input_parameters = [
             'id'        => $user->getId(),
             'name'      => $user->getName(),
-            'password'  => md5($user->getPassword()),
+            'password'  => password_hash($user->getPassword(), PASSWORD_DEFAULT),
             'type'      => $user->getType()
         ];
 

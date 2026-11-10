@@ -22,7 +22,7 @@ class Authentication
     public function attempt($email, $password)
     {
         $user = $this->userRepository->findByEmail($email);
-        if ($user->getPassword() === $password) {
+        if (password_verify((string) $password, (string) $user->getPassword())) {
             $_SESSION['user'] = $user->getId();
             $_SESSION['name'] = $user->getName();
             return true;
