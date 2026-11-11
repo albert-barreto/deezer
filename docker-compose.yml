@@ -3,7 +3,7 @@ version: '3.7'
 services:
 
   deezer-application:
-    image: mehrdadkhah/php7
+    build: .
     container_name: deezer-application
     working_dir: /var/www
     command: php -S 0.0.0.0:8080 -t public
@@ -20,7 +20,7 @@ services:
       - default
 
   deezer-database:
-    image: mysql:latest
+    image: mysql:8.4
     container_name: deezer-database
     environment:
       MYSQL_ROOT_PASSWORD: root
